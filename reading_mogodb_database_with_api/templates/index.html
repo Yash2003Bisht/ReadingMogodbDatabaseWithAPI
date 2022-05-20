@@ -1,0 +1,111 @@
+{% extends 'layout.html' %}
+{% block body %}
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="/">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Dashboard
+                            </a>
+                            
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Dashboard</h1>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                DataTable
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>Intensity</th>
+                                            <th>Likelihood</th>
+                                            <th>Relevance</th>
+                                            <th>Year</th>
+                                            <th>Country</th>
+                                            <th>Topics</th>
+                                            <th>Region</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Intensity</th>
+                                            <th>Likelihood</th>
+                                            <th>Relevance</th>
+                                            <th>Year</th>
+                                            <th>Country</th>
+                                            <th>Topics</th>
+                                            <th>Region</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for i in data %}
+                                        <tr>
+                                            {% if i["intensity"] == "" %}
+                                                <td>Unavailable</td>
+                                            {% else %}
+                                                <td>{{i["intensity"]}}</td>
+                                            {% endif %}
+                                            {% if i["likelihood"] == "" %}
+                                                <td>Unavailable</td>
+                                            {% else %}
+                                                <td>{{i["likelihood"]}}</td>
+                                            {% endif %}
+                                            {% if i["relevance"] == "" %}
+                                                <td>Unavailable</td>
+                                            {% else %}
+                                                <td>{{i["relevance"]}}</td>
+                                            {% endif %}
+                                            {% if i["start_year"] == "" and i["end_year"] == ""%}
+                                            <td>Unavailable</td>
+                                            {% elif i["start_year"] == ""%}
+                                            <td>Unavailable to {{i["end_year"]}}</td>
+                                            {% elif i["end_year"] == ""%}
+                                            <td>{{i["start_year"]}} to Unavailable</td>
+                                            {% else %}
+                                            <td>{{i["start_year"]}} to {{i["end_year"]}}</td>
+                                            {% endif %}
+                                            {% if i["country"] == "" %}
+                                                <td>Unavailable</td>
+                                            {% else %}
+                                                <td>{{i["country"]}}</td>
+                                            {% endif %}
+                                            {% if i["topic"] == "" %}
+                                                <td>Unavailable</td>
+                                            {% else %}
+                                                <td>{{i["topic"]}}</td>
+                                            {% endif %}
+                                            {% if i["region"] == "" %}
+                                                <td>Unavailable</td>
+                                            {% else %}
+                                                <td>{{i["region"]}}</td>
+                                            {% endif %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                            
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+{% endblock body %}
